@@ -1,0 +1,14 @@
+{
+  "repo": "correll/hive",
+  "discussionCategory": "General",
+  "lease": {
+    "defaultMinutes": 120,
+    "maxMinutes": 480,
+    "requireClaim": true
+  },
+  "loop": {
+    "maxAgentHops": 3,
+    "maxTurnsPerTaskPerAgent": 20,
+    "maxUsdPerTaskPerAgent": 5
+  }
+}

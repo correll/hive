@@ -1,0 +1,8 @@
+{
+  "name": "hive",
+  "version": "0.1.0",
+  "description": "Participant-side bundle for hive: Stop-hook summaries, lease-enforcing PreToolUse hook, MCP tools for claiming and posting, channel etiquette skill, channel-scribe subagent.",
+  "author": { "name": "Nikolaus Correll" },
+  "repository": "https://github.com/correll/hive",
+  "license": "MIT"
+}

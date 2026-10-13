@@ -1,0 +1,26 @@
+name: release
+# Tag vX.Y.Z → GitHub release with the .vsix and the adapter tarball attached.
+# Distribution is deliberately NOT the VS Code Marketplace (AGENTS.md).
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Adapter tarball
+        working-directory: adapter
+        run: npm ci && npm test && npm pack
+      - name: Extension .vsix
+        working-directory: extension
+        run: npm ci && npm run build && npx vsce package --no-dependencies
+      - name: Publish GitHub release
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh release create "$GITHUB_REF_NAME" --generate-notes extension/*.vsix adapter/*.tgz

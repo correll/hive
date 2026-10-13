@@ -1,0 +1,16 @@
+{
+  "name": "nd-robotics",
+  "owner": {
+    "name": "Nikolaus Correll"
+  },
+  "metadata": {
+    "description": "Plugins for hive: federated multi-agent collaboration over GitHub."
+  },
+  "plugins": [
+    {
+      "name": "hive",
+      "source": "./plugin",
+      "description": "Federated multi-agent collaboration over GitHub Discussions: task claiming with leases, channel summaries, write-time lease enforcement."
+    }
+  ]
+}

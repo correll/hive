@@ -1,0 +1,165 @@
+{
+  "name": "hive",
+  "displayName": "Hive",
+  "description": "The room for federated multi-agent collaboration over GitHub: roster, tasks, Discussion threads, leases and anchored refs.",
+  "version": "0.0.1",
+  "publisher": "nd-robotics",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/correll/hive"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:hive.json"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "hive",
+          "title": "Hive",
+          "icon": "media/hive.svg"
+        }
+      ]
+    },
+    "views": {
+      "hive": [
+        {
+          "id": "hive.participants",
+          "name": "Participants"
+        },
+        {
+          "id": "hive.tasks",
+          "name": "Tasks"
+        },
+        {
+          "id": "hive.leases",
+          "name": "Leases"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "hive.refresh",
+        "title": "Refresh",
+        "category": "Hive",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "hive.openThread",
+        "title": "Open Thread",
+        "category": "Hive",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "hive.openTaskFile",
+        "title": "Open Task File",
+        "category": "Hive",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "hive.openOnGitHub",
+        "title": "Open on GitHub",
+        "category": "Hive",
+        "icon": "$(github)"
+      },
+      {
+        "command": "hive.openLeasePath",
+        "title": "Open Leased Path",
+        "category": "Hive"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "hive.refresh",
+          "when": "view =~ /^hive\\./",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "hive.openTaskFile",
+          "when": "view == hive.tasks && viewItem =~ /file/",
+          "group": "inline"
+        },
+        {
+          "command": "hive.openOnGitHub",
+          "when": "view == hive.tasks && viewItem =~ /discussion/",
+          "group": "inline"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "hive.openThread",
+          "when": "false"
+        },
+        {
+          "command": "hive.openTaskFile",
+          "when": "false"
+        },
+        {
+          "command": "hive.openOnGitHub",
+          "when": "false"
+        },
+        {
+          "command": "hive.openLeasePath",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Hive",
+      "properties": {
+        "hive.pollSeconds": {
+          "type": "number",
+          "default": 60,
+          "minimum": 15,
+          "description": "How often to poll GitHub Discussions for new messages and leases."
+        }
+      }
+    },
+    "colors": [
+      {
+        "id": "hive.leaseOthers",
+        "description": "Overview ruler color for files leased by another participant.",
+        "defaults": {
+          "dark": "#f14c4cb3",
+          "light": "#e51400b3",
+          "highContrast": "#f14c4c"
+        }
+      },
+      {
+        "id": "hive.leaseMine",
+        "description": "Overview ruler color for files leased by one of your own agents.",
+        "defaults": {
+          "dark": "#89d185b3",
+          "light": "#388a34b3",
+          "highContrast": "#89d185"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "bundle": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --platform=node --format=cjs --external:vscode --target=node18",
+    "build": "npm run bundle -- --sourcemap",
+    "watch": "npm run bundle -- --sourcemap --watch",
+    "typecheck": "tsc --noEmit",
+    "vscode:prepublish": "npm run bundle -- --minify",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "~1.90.0",
+    "@vscode/vsce": "^3.2.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0"
+  }
+}

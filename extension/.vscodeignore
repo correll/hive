@@ -1,0 +1,8 @@
+# Only dist/, media/, package.json, README.md and LICENSE ship in the .vsix.
+.vscode/**
+src/**
+node_modules/**
+tsconfig.json
+.gitignore
+**/*.map
+**/*.ts

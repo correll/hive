@@ -1,0 +1,30 @@
+{
+  "name": "@nd-robotics/hive-adapter",
+  "version": "0.1.0",
+  "description": "Hive participant adapter: Discussion polling, poll-and-resume agent runner, MCP server and Claude Code hooks.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "hive": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "typecheck": "tsc -p . --noEmit",
+    "test": "tsc -p . && node --test \"dist/test/*.test.js\"",
+    "prepare": "tsc -p ."
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}
