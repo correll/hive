@@ -141,6 +141,7 @@ export async function mcp(cwd: string): Promise<void> {
         env.lease = { paths: mine.map((l) => l.path), expires };
       }
       const { msg } = await post(task, env);
+      writeLeaseCache(c, (await c.channel.snapshot()).leases);
       return ok(`Posted ${msg.url}. Released ${mine.length} lease(s)${env.lease ? ` to ${to}` : ""}.`);
     }),
   );
